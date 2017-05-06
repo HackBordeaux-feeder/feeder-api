@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
       table.increments('id').primary().index()
       table.integer('user_id').references('users.id')
       table.string('service', 256)
-      table.string('option', 256)
+      table.string('option', 512)
       table.timestamps(true, true)
     }),
     knex.schema.table('users', function (table) {

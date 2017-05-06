@@ -43,6 +43,6 @@ app.use((req, res, next) => {
 
 app.use('/', api)
 
-app.listen( process.env.PORT || 3000, function () {
+app.listen( process.env.PORT || 5000, function () {
   console.log('Running!')
 })
