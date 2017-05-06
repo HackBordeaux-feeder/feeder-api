@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import facebook from './facebook'
-
+import medium from './medium'
 let api = Router()
 
 api.get('/', (req, res) => {
@@ -8,5 +8,7 @@ api.get('/', (req, res) => {
 })
 
 api.use('/facebook', facebook)
+
+api.use('/medium', medium)
 
 export default api
