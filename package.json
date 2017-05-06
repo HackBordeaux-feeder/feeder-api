@@ -17,7 +17,8 @@
     "nightmare": "^2.10.0",
     "nodemon": "^1.9.2",
     "pg": "^6.1.5",
-    "sha256": "^0.2.0"
+    "sha256": "^0.2.0",
+    "xml2js": "^0.4.17"
   },
   "scripts": {
     "dev": "nodemon -w src --exec \"babel-node src --presets es2015,stage-0\"",
