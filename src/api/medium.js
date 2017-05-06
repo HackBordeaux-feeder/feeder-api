@@ -25,7 +25,6 @@ mediumRoutes.get('/', (req, res) => {
               link,
               pubDate,
               author,
-              content,
               image
             }))
           })
