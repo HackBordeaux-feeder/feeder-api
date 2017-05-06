@@ -1,9 +1,11 @@
 
 export default function auth (req, res, next) {
   const token = req.cookies.token
-  
-  console.log('cookies', req.cookies)
-  console.log('token', token)
+
+  function sendError () {
+    req.auth = { isLoggedIn: false }
+    res.send('NOT LOGGED IN')
+  }
 
   if (token) {
     new req.db.Token({ token }).fetch({ withRelated: ['user'] })
@@ -16,14 +18,13 @@ export default function auth (req, res, next) {
           user,
           isLoggedIn: false,
         }
+        next()
       } else {
-        req.auth = { isLoggedIn: false }
+        sendError()
       }
-      next()
     })
     
   } else {
-    req.auth = { isLoggedIn: false }
-    next()
+    sendError()
   }
 }

@@ -3,7 +3,8 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import api from './api'
 import models from './helpers/models/index'
-import auth from './middleware/auth'
+import authEndpoints from './auth/endpoints'
+import authMiddleware from './auth/middleware'
 import cookieParser from 'cookie-parser'
 
 const app = express()
@@ -27,8 +28,10 @@ app.use((req, res, next) => {
   next()
 })
 
+// Authorization endpoints
+app.use('/auth', authEndpoints)
 // Authorization middleware
-app.use(auth)
+app.use(authMiddleware)
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
