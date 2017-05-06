@@ -8,9 +8,11 @@ export default function auth (req, res, next) {
   }
 
   if (token) {
-    new req.db.Token({ token }).fetch({ withRelated: ['user'] })
+    new req.db.Token({ token }).fetch({ withRelated: ['user', 'user.options'] })
     .then((data) => {
-      const user = data.relations.user.attributes
+      const user = data.toJSON().user
+
+      delete user.password
 
       if (data) {
         req.auth = {

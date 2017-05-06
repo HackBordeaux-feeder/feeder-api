@@ -6,7 +6,7 @@ import medium from './medium'
 let api = Router()
 
 api.get('/', (req, res) => {
-  res.status(200).json({ message: 'Connected!' })
+  res.status(200).json({ message: 'Connected!', user: req.auth.user })
 })
 
 api.use('/facebook', facebook)
