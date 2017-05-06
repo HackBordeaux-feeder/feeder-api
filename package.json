@@ -16,7 +16,8 @@
     "knex": "^0.13.0",
     "nightmare": "^2.10.0",
     "nodemon": "^1.9.2",
-    "pg": "^6.1.5"
+    "pg": "^6.1.5",
+    "sha256": "^0.2.0"
   },
   "scripts": {
     "dev": "nodemon -w src --exec \"babel-node src --presets es2015,stage-0\"",
