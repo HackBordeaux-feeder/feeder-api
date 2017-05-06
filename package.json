@@ -13,7 +13,8 @@
     "eslint": "^3.1.1",
     "express": "^4.15.2",
     "nightmare": "^2.10.0",
-    "nodemon": "^1.9.2"
+    "nodemon": "^1.9.2",
+    "xml2js": "^0.4.17"
   },
   "scripts": {
     "dev": "nodemon -w src --exec \"babel-node src --presets es2015,stage-0\"",
