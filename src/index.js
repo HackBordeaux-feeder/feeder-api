@@ -3,10 +3,13 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import api from './api'
 import models from './helpers/models/index'
+import auth from './middleware/auth'
+import cookieParser from 'cookie-parser'
 
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+app.use(cookieParser())
 
 // DATABASE
 const knex = require('knex')({
@@ -24,6 +27,8 @@ app.use((req, res, next) => {
   next()
 })
 
+// Authorization middleware
+app.use(auth)
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
