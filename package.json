@@ -30,6 +30,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "parse": "nodemon -w src --exec \"babel-node src/scripts/tryParser.js --presets es2015,stage-0\"",
     "heroku-postbuild": "npm run build",
+    "migrate": "knex migrate:latest",
     "knex": "knex"
   }
 }
