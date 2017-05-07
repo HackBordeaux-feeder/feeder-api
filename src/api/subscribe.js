@@ -11,7 +11,7 @@ subscribeRouter.post('/', (req, res) => {
   )
   .save()
   .then((data) => {
-    res.send('OK')
+    res.send(data.id)
   })
   .catch((err) => {
     res.status(500).send(err)
