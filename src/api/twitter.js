@@ -9,8 +9,8 @@ twitterRoutes.get('/', (req, res) => {
 
   getTweets(options)
   .then((tweets)=>{
-    console.log('resolve this tweets', tweets)
-    console.log(tweets)
+    // console.log('resolve this tweets', tweets)
+    // console.log(tweets)
     res.send(tweets)
   }, (err) => {
     console.log('ERROR', err)
