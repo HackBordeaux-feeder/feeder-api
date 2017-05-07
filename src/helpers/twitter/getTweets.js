@@ -28,7 +28,7 @@ const getTweets = function(subscriptions) {
             const username = status.user.screen_name
             const name = status.user.name
             tweetsList.push({createdAt, name, username, verified, text, retweets, favourites, profileImage})
-            if (index === subscriptions.length && jindex === tweets.statuses.length) {
+            if (index === subscriptions.length - 1 && jindex === tweets.statuses.length - 1) {
               resolve(tweetsList)
             }
           })
@@ -36,7 +36,7 @@ const getTweets = function(subscriptions) {
         }
       });
     })
-    // resolve(tweetsList)
+    ^// resolve(tweetsList)
   })
 }
 
