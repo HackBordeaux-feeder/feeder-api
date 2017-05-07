@@ -8,10 +8,10 @@ import deleteFolderRecursive from '../helpers/delete-folders-recursive'
 
 let facebookRoutes = Router()
 
-let user = 3
-let targets = ['https://www.facebook.com/groups/hackathonhackers/?fref=ts', 'https://www.facebook.com/danicarmona?fref=ts']
 
 facebookRoutes.get('/', (req, res) => {
+  const targets = req.auth.user.options.filter((item) => (item.service === 'Facebook')).map((option) => return option.option)
+  const user = req.auth.user.id
 
   loginFacebook(user)
   .then(() => {
