@@ -10,7 +10,7 @@ authRoutes.post('/login', (req, res) => {
 
   const token = sha256(`${Math.random()}`)
   
-  new req.db.User({ user_name: username }).fetch()
+  new req.db.User({ user_name: username }).fetch({ withRelated: 'options' })
   .then((user) => {
     const userid = user && user.id || {}
     return Promise.all([user, new req.db.Token({
