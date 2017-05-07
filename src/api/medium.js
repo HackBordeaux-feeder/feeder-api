@@ -8,6 +8,7 @@ let mediumRoutes = Router()
 
 mediumRoutes.get('/', (req, res) => {
   const url = 'https://medium.com/feed/the-mission'
+  const articlesToSend = []
   getXML(url)
     .then((xml) => {
       xml2json(xml)
@@ -20,13 +21,16 @@ mediumRoutes.get('/', (req, res) => {
             const content = article['content:encoded']
             const getImageRegex = /(<img alt="" src="[\:\w\d\.\/\-\*]*" \/>)/g
             var image = getMatches(content, getImageRegex, 1)[0]
-            res.send(JSON.stringify({
+            articlesToSend.push({
               title,
               link,
               pubDate,
               author,
               image
-            }))
+            })
+            if (articlesToSend.length >= 5) {
+              res.send(JSON.stringify(articlesToSend))
+            }
           })
         })
         .catch((err)=>console.log("Can't set headers after they are sent ERROR 1"))

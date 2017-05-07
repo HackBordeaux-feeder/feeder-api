@@ -4,7 +4,8 @@ import getTweets from '../helpers/twitter/getTweets'
 let twitterRoutes = Router()
 
 twitterRoutes.get('/', (req, res) => {
-  getTweets(['dan_abramov', 'nodejs']).then((tweets)=>{
+  const options = req.auth.user.options.filter((item) => (item.service === 'twitter')).map((option) => option.option)
+  getTweets(options).then((tweets)=>{
     res.send(tweets)
   })
 })
