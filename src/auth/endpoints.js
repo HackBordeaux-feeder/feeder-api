@@ -12,17 +12,15 @@ authRoutes.post('/login', (req, res) => {
   
   new req.db.User({ user_name: username }).fetch()
   .then((user) => {
-    return user && user.id || {}
-  })
-  .then((userid) => {
-    return new req.db.Token({
+    const userid = user && user.id || {}
+    return Promise.all([user, new req.db.Token({
       token,
       user_id: userid,
     })
-    .save(null, {method: 'insert'})
+    .save(null, {method: 'insert'})])
   })
-  .then((data) => {
-    res.send({ token })
+  .then(([user, data]) => {
+    res.send({ token, user })
   })
   .catch((error) => {
     console.error('AUTH ERROR', error)
