@@ -2,7 +2,7 @@ import Twitter from 'twitter'
 import Promise from 'bluebird'
 
 const getTweets = function(subscriptions) {
-  return new Promise(function(resolve){
+  return new Promise(function(resolve, reject) {
     const client = new Twitter({
       consumer_key: process.env.CONSUMER_KEY,
       consumer_secret: process.env.CONSUMER_SECRET,
@@ -14,6 +14,7 @@ const getTweets = function(subscriptions) {
     subscriptions.forEach((subscription) => {
       client.get('search/tweets', {q: 'from:'+subscription, count: tweetCount}, function(error, tweets, response) {
         if (error) {
+          reject(error)
           console.log(error);
         } else {
           tweets.statuses.forEach((status)=> {
@@ -27,10 +28,8 @@ const getTweets = function(subscriptions) {
             const username = status.user.screen_name
             const name = status.user.name
             tweetsList.push({createdAt, name, username, verified, text, retweets, favourites, profileImage})
-            if (tweetsList.length === subscriptions.length*tweetCount) {
-              resolve(tweetsList)
-            }
           })
+          resolve(tweetsList)
           // console.log(response);
         }
       });
