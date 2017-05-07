@@ -11,9 +11,12 @@ subscribeRouter.post('/', (req, res) => {
   )
   .save()
   .then((data) => {
-    res.send(data.id)
-  })
-  .catch((err) => {
+    if (data) {
+      res.send({ id: data.toJSON().id })
+    } else {
+      res.status(500).send('NO DATA')
+    }
+  }, (err) => {
     res.status(500).send(err)
   })
 })
