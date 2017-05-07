@@ -20,6 +20,7 @@ authRoutes.post('/login', (req, res) => {
     .save(null, {method: 'insert'})])
   })
   .then(([user, data]) => {
+    res.set('Set-Cookie', `token=${token}`)
     res.send({ token, user })
   })
   .catch((error) => {
