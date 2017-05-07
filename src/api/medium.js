@@ -25,7 +25,7 @@ mediumRoutes.get('/', (req, res) => {
                   const pubDate = article.pubDate
                   const author = article['dc:creator']
                   const content = article['content:encoded']
-                  const getImageRegex = /(<img alt="" src="[\:\w\d\.\/\-\*]*" \/>)/g
+                  const getImageRegex = /<img alt="" src="([\:\w\d\.\/\-\*]*)" \/>/g
                   var image = getMatches(content, getImageRegex, 1)[0]
                   // console.log(title);
                   articlesToSend.push({
