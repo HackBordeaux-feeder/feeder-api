@@ -34,6 +34,7 @@ export default function models (knex) {
   return {
     User,
     Token,
+    Option,
     bookshelf: bkshlf,
   }
 }
