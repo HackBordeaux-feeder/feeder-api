@@ -36,7 +36,7 @@ const getTweets = function(subscriptions) {
         }
       });
     })
-    ^// resolve(tweetsList)
+    // resolve(tweetsList)
   })
 }
 
