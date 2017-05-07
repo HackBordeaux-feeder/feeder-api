@@ -10,17 +10,21 @@ export default function auth (req, res, next) {
   if (token) {
     new req.db.Token({ token }).fetch({ withRelated: ['user', 'user.options'] })
     .then((data) => {
-      const user = data.toJSON().user
-
-      delete user.password
-
       if (data) {
-        req.auth = {
-          token,
-          user,
-          isLoggedIn: false,
+        const user = data.toJSON().user
+
+        delete user.password
+
+        if (data) {
+          req.auth = {
+            token,
+            user,
+            isLoggedIn: false,
+          }
+          next()
+        } else {
+          sendError()
         }
-        next()
       } else {
         sendError()
       }
