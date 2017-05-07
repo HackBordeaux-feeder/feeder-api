@@ -3,10 +3,10 @@ const Nightmare = require("nightmare");
 const email = process.env.EMAIL
 const password = process.env.PASSWORD
 
-const loginFacebook = (user) => {
+const loginFacebook = (user, email, password) => {
   return new Promise((resolve) => {
    console.log("crash");
-   const nightmare = Nightmare({show: true,
+   const nightmare = Nightmare({show: false,
      webPreferences: {
        partition: `persist:${user}`
      }

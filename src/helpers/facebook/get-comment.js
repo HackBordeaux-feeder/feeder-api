@@ -3,7 +3,7 @@ import getMatches from '../get-matches'
 const fs = require('fs');
 
 const commentFacebook = (user, target, index, url) => {
-  const nightmare = Nightmare({show: true,
+  const nightmare = Nightmare({show: false,
     webPreferences: {
       partition: `persist:${user}`
     }
@@ -15,7 +15,7 @@ const commentFacebook = (user, target, index, url) => {
     .end()
       .then(function () {
         console.log("be brave");
-        resolve(true)
+        // resolve(true)
       })
       .catch(function (error) {
         console.error('Error:', error);
@@ -26,10 +26,12 @@ const commentFacebook = (user, target, index, url) => {
       fs.readFile(`${url}/${user}/${index}.html`, "utf-8", (err, data) => {
         if(err) throw err;
         let regex = /<div class="fbUserContent[\s\S]*?>(<div class[\s\S]*?data-utime=[\s\S]*?)<div><form/g
-        // console.log(data);
+        console.log(data);
+        let regex_profile = /<div class="fbUserContent[\s\S]*?>(<div class[\s\S]*?data-utime=[\s\S]*?)<div><form/g
         const articles = data.match(regex)
         // getMatces(data, regex, articles.length )
         console.log(articles);
+        resolve(articles)
         console.log('longitud:',articles.length);
       })
     })

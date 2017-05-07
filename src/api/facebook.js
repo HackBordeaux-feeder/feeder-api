@@ -12,8 +12,13 @@ let facebookRoutes = Router()
 facebookRoutes.get('/', (req, res) => {
   const targets = req.auth.user.options.filter((item) => (item.service === 'Facebook')).map((option) => option.option)
   const user = req.auth.user.id
+  const fbuser = req.auth.user.fb_username
+  const fbpass = req.auth.user.fb_password
 
-  loginFacebook(user)
+
+  console.log(targets)
+
+  loginFacebook(user, fbuser, fbpass)
   .then(() => {
     console.log("creatin folder");
     fs.mkdirSync(__dirname+'/'+user)
@@ -22,12 +27,12 @@ facebookRoutes.get('/', (req, res) => {
     console.log("getting content");
     return new Promise((resolve, reject) => {
       Promise.map(targets, (target, index) => {
-        console.log("map");
-        return getComments(user, target, index, __dirname)
+        if(target !== ''){console.log("map");
+        return getComments(user, target, index, __dirname)}
       },{concurrency: 3})
-      .then(() => {
+      .then((articles) => {
         console.log("resolve");
-        resolve(true)
+        resolve(articles)
       }).catch(() => {
         console.log("reject");
         reject(true)
@@ -38,7 +43,7 @@ facebookRoutes.get('/', (req, res) => {
     console.log(data);
     console.log("envant");
     deleteFolderRecursive(__dirname + `/${user}`)
-    res.sendStatus(200)
+    res.send(JSON.stringify(data))
   })
   .catch((err) => {
     console.log(err);
