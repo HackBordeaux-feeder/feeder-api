@@ -29,11 +29,11 @@ const getTweets = function(subscriptions) {
             const name = status.user.name
             tweetsList.push({createdAt, name, username, verified, text, retweets, favourites, profileImage})
           })
-          resolve(tweetsList)
           // console.log(response);
         }
       });
     })
+    resolve(tweetsList)
   })
 }
 
