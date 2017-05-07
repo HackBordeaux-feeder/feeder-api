@@ -5,6 +5,7 @@ import medium from './medium'
 import twitter from './twitter'
 import subscribe from './subscribe'
 import user from './user'
+import fbcredentials from './fbCredentials'
 
 let api = Router()
 
@@ -21,5 +22,7 @@ api.use('/twitter', twitter)
 api.use('/subscribe', subscribe)
 
 api.use('/user', user)
+
+api.use('/fbcredentials', fbcredentials)
 
 export default api
