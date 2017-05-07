@@ -6,7 +6,7 @@ import twitter from './twitter'
 import subscribe from './subscribe'
 import user from './user'
 import fbcredentials from './fbCredentials'
-
+import deleteOption from './delete'
 let api = Router()
 
 api.get('/', (req, res) => {
@@ -24,5 +24,7 @@ api.use('/subscribe', subscribe)
 api.use('/user', user)
 
 api.use('/fbcredentials', fbcredentials)
+
+api.use('/deleteOption', deleteOption)
 
 export default api
