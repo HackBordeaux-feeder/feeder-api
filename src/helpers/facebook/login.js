@@ -1,9 +1,30 @@
 const Nightmare = require("nightmare");
-const nightmare = Nightmare({show: true})
 
 const email = process.env.EMAIL
 const password = process.env.PASSWORD
-nightmare
-.goto('https://www.facebook.com/')
-.type('#email', email)
-.type('#pass', password)
+
+const loginFacebook = (user) => {
+  return new Promise((resolve) => {
+   console.log("crash");
+   const nightmare = Nightmare({show: true,
+     webPreferences: {
+       partition: `persist:${user}`
+     }
+   })
+   nightmare
+   .goto('https://www.facebook.com/')
+   .type('#email', email)
+   .type('#pass', password + '\u000d')
+   .wait(2000)
+   .end()
+     .then(function (result) {
+       resolve(true)
+     })
+     .catch(function (error) {
+        resolve(error)
+       console.error('Error:', error);
+     })
+ })
+}
+
+export default loginFacebook
