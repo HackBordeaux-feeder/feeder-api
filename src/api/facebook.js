@@ -10,7 +10,7 @@ let facebookRoutes = Router()
 
 
 facebookRoutes.get('/', (req, res) => {
-  const targets = req.auth.user.options.filter((item) => (item.service === 'Facebook')).map((option) => return option.option)
+  const targets = req.auth.user.options.filter((item) => (item.service === 'Facebook')).map((option) => option.option)
   const user = req.auth.user.id
 
   loginFacebook(user)
