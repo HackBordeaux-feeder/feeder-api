@@ -29,4 +29,17 @@ authRoutes.post('/login', (req, res) => {
   })
 })
 
+authRoutes.post('/signup', (req, res) => {
+  const body = req.body
+  
+  new req.db.User(body)
+  .save()
+  .then((data) => {
+    res.send('OK')
+  })
+  .catch((err) => {
+    res.status(500).send(err)
+  })
+})
+
 export default authRoutes
