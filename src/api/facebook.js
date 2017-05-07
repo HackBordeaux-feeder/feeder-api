@@ -31,7 +31,7 @@ facebookRoutes.get('/', (req, res) => {
         return getComments(user, target, index, __dirname)}
       },{concurrency: 3})
       .then((articles) => {
-        console.log("resolve");
+        // console.log("resolve");
         resolve(articles)
       }).catch(() => {
         console.log("reject");
@@ -40,10 +40,10 @@ facebookRoutes.get('/', (req, res) => {
     })
   })
   .then((data) => {
-    console.log(data);
     console.log("envant");
     deleteFolderRecursive(__dirname + `/${user}`)
-    res.send(JSON.stringify(data))
+    console.log(data[0])
+    res.send(JSON.stringify(data[0]))
   })
   .catch((err) => {
     console.log(err);
