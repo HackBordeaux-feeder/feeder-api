@@ -28,7 +28,7 @@ mediumRoutes.get('/', (req, res) => {
               author,
               image
             })
-            if (articles.length >= 5) {
+            if (articlesToSend.length >= 5) {
               res.send(JSON.stringify(articlesToSend))
             }
           })
