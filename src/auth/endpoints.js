@@ -12,7 +12,7 @@ authRoutes.post('/login', (req, res) => {
   
   new req.db.User({ user_name: username }).fetch()
   .then((user) => {
-    return user.id
+    return user && user.id || {}
   })
   .then((userid) => {
     return new req.db.Token({
